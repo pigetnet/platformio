@@ -1,0 +1,21 @@
+#!/bin/bash
+# http://docs.platformio.org/en/latest/installation.html
+# http://www.russelldavis.org/2015/08/01/platformio-on-the-raspberry-pi/
+
+/show/description "Installing platformio"
+/show/messagebox "Make from Russell Davis tutorial"
+/show/messagebox "http://www.russelldavis.org/2015/08/01/platformio-on-the-raspberry-pi/"
+
+
+/show/listecho "Install dependencies"
+# Dependencies
+/system/install libmpc-dev
+/system/install libelf1
+/system/install libftdi1
+
+/show/listecho "Install platformio"
+python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+
+/system/makedir /user/arduino
+
+
