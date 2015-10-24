@@ -1,1 +1,1 @@
-cd /user/arduino/$1;plateformio run
+cd /user/arduino/$1;platformio run
