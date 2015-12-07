@@ -1,3 +1,4 @@
 #!/bin/bash
-/system/gitcloner pigetArduino $1 /user/arduino/$1
+project=$1
+/system/gitcloner pigetArduino/$project /user/arduino/$project
 
