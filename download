@@ -1,4 +1,9 @@
 #!/bin/bash
-project=$1
-/system/gitcloner pigetArduino/$project /user/arduino/$project
-
+if [[ $# -eq 1 ]];then
+	project=$1
+	if [[ ! -z $project ]];then
+		/system/gitcloner pigetArduino/$project /user/arduino/$project
+	fi
+else
+	echo "Specify projects see https://github.com/pigetArduino"
+fi

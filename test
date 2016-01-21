@@ -1,0 +1,1 @@
+cd /user/arduino/$1/test;python test.py
