@@ -1,9 +1,27 @@
 #!/bin/bash
-if [[ $# -eq 1 ]];then
-	project=$1
-	if [[ ! -z $project ]];then
-		/system/gitcloner pigetArduino/$project /user/arduino/$project
-	fi
+
+#1 ARGUMENTS
+if [ $# -ne 1 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [platformio] [update]"
+	/show/usageDescription "Download sketch from github (by default pigetArduino)"
+	/show/usage "$0 repo or $0 username/repo"
+	/show/example "$0 radio2serial or $0 pigetArduino/radio2serial"
 else
-	echo "Specify projects see https://github.com/pigetArduino"
+	reponame=$1
+    if [[ $reponame == *"/"* ]];then
+        #echo "Custom detected"
+        username=${reponame%/*}
+        reponame=${reponame#*/}
+    else
+        username="pigetArduino"
+    fi
+
+    /show/description "[PLATFORMIO] Download $reponame --> /user/arduino/$reponame"
+
+	if [ ! -d $project ];then
+		/system/gitcloner $username/$reponame /user/arduino/$reponame
+	else
+		/show/listecho "Project already exists at /user/arduino/$reponame" $ERR
+	fi
 fi

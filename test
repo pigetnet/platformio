@@ -1,1 +1,22 @@
-cd /user/arduino/$1/test;python test.py
+#!/bin/bash
+#1 ARGUMENTS
+if [ $# -ne 1 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[alpha] [platformio] [arduino] [test] [python]"
+	/show/usageDescription "Run a python test"
+	/show/usage "$0 folder or $0 folder (from /user/arduino)"
+	/show/example "$0 /home/pi/nrftest or $0 nrftest"
+else
+	dir=$1
+
+		#Check if we have a relative or absolute dir
+		if [ -d "/user/arduino/$dir" ];then
+	           dir="/user/arduino/$dir"
+	    fi
+
+	if [ -f "$dir/test/test.py" ];then
+		cd $dir/test;python test.py
+	else
+		/show/listecho "No test founded at $dir/test/test.py" $ERR
+	fi
+fi

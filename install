@@ -2,20 +2,24 @@
 # http://docs.platformio.org/en/latest/installation.html
 # http://www.russelldavis.org/2015/08/01/platformio-on-the-raspberry-pi/
 
-/show/description "Installing platformio"
-/show/messagebox "Make from Russell Davis tutorial"
-/show/messagebox "http://www.russelldavis.org/2015/08/01/platformio-on-the-raspberry-pi/"
+if [ $# -ne 0 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [platformio] [install]"
+	/show/usageDescription "Install platformio"
+	/show/usage "$0"
+else
+	/show/description "[PLATFORMIO] Install"
+	/show/listecho "This script is inspired by Russell Davis Tutorial" $PICOLOR
+	/show/listecho "http://www.russelldavis.org/2015/08/01/platformio-on-the-raspberry-pi/" $PICOLOR
 
+	/show/listecho "Install dependencies" $OK
+	# Dependencies
+	/system/install libmpc-dev
+	/system/install libelf1
+	/system/install libftdi1
 
-/show/listecho "Install dependencies"
-# Dependencies
-/system/install libmpc-dev
-/system/install libelf1
-/system/install libftdi1
+	/show/listecho "Install platformio" $OK
+	python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
 
-/show/listecho "Install platformio"
-python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
-
-/system/makedir /user/arduino
-
-
+	/system/makedir /user/arduino
+fi

@@ -1,0 +1,11 @@
+#!/bin/bash
+#1/2 ARGUMENTS
+if [ $# -eq 0 ] || [ $# -gt 2 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [platformio] [arduino]"
+	/show/usageDescription "Compile and upload a sketch on an arduino nano"
+	/show/usage "$0 folder or $0 folder (from /user/arduino) or $0 folder port"
+	/show/example "$0 radio2serial or $0 /home/pi/blink or $0 radio2serial /dev/ttyUSB1"
+else
+	/do/platformio/run $@ "uno"
+fi

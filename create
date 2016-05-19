@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# 1 Arguments
+if [ $# -ne 1 ] || [[ $1 == "--help" ]] || [ $(id -u) -ne 0 ];then
+	/show/messagebox "$0"
+	/show/info "[beta] [platformio] [init]"
+	/show/usageDescription "Create an arduino sketch in /user/arduino"
+	/show/usage "$0 folder"
+	/show/example "$0 blinkExample"
+else
+
+	project_folder=$1
+	project_name=$(basename $project_folder)
+	#WARNING : If you specified a subfolder this will generate errors (this must be handle)
+	/show/description "[PLATFORMIO] Create /user/arduino/$project_folder"
+	#If folder doesn't exists
+	if [ ! -d /user/arduino/$project_folder ];then
+
+		#Generate folders
+		/system/makedir /user/arduino/$project_folder
+		/system/makedir /user/arduino/$project_folder/libraries
+		/system/makedir /user/arduino/$project_folder/$project_name
+
+		#Generate working empty sketch
+		cp /do/platformio/conf/arduino.ino /user/arduino/$project_folder/$project_name/$project_name.ino
+
+		#Generate .gitignore (to avoid copying temporary file)
+		cp /do/platformio/conf/gitignore /user/arduino/$project_folder/.gitignore
+
+		#Copy default platformio.ini
+		cp /do/platformio/conf/arduino.ini /user/arduino/$project_folder/platformio.ini
+		/string/replaceLineIfExists /user/arduino/$project_folder/platformio.ini "TOREPLACE" "src_dir = $project_name"
+	else
+		/show/listecho "Directory exists" $ERR
+	fi
+fi
