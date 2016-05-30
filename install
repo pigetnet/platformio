@@ -12,14 +12,19 @@ else
 	/show/listecho "This script is inspired by Russell Davis Tutorial" $PICOLOR
 	/show/listecho "http://www.russelldavis.org/2015/08/01/platformio-on-the-raspberry-pi/" $PICOLOR
 
-	/show/listecho "Install dependencies" $OK
-	# Dependencies
-	/system/install libmpc-dev
-	/system/install libelf1
-	/system/install libftdi1
-
-	/show/listecho "Install platformio" $OK
-	python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+	if [ ! -f "/usr/local/bin/platformio" ];then
+		/show/listecho "Install dependencies" $OK
+		# Dependencies
+		/system/install libmpc-dev
+		/system/install libelf1
+		/system/install libftdi1
+		/show/listecho "Install platformio" $OK
+		python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+	else
+		/do/platformio/update
+	fi
 
 	/system/makedir /user/arduino
+
+
 fi
