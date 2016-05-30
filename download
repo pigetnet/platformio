@@ -19,8 +19,10 @@ else
 
     /show/description "[PLATFORMIO] Download $reponame --> /user/arduino/$reponame"
 
-	if [ ! -d $project ];then
-		/system/gitcloner $username/$reponame /user/arduino/$reponame
+	projectDir="/user/arduino/$reponame"
+
+	if [ ! -d $projectDir ];then
+		/system/gitcloner $username/$reponame $projectDir
 	else
 		/show/listecho "Project already exists at /user/arduino/$reponame" $ERR
 	fi
