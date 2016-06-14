@@ -19,7 +19,7 @@
 | Example                                                        | /do/platformio/download radio2serial or /do/platformio/download pigetArduino/radio2serial |
 | Arguments                                                      | 1:reponame,                                                                               |
 | Variables                                                      | reponame=$1, username=${reponame%/*}, reponame=${reponame#*/},                            |
-| System                                                         | /system/gitcloner $username/$reponame /user/arduino/$reponame,                            |
+| System                                                         | /system/gitcloner $username/$reponame $projectDir,                                        |
 | 1. [PLATFORMIO] Download $reponame --> /user/arduino/$reponame |                                                                                           |
 | 1. Project already exists at /user/arduino/$reponame           |                                                                                           |
 
@@ -29,6 +29,7 @@
 | Description                                                                        | Install platformio                                                                                            |
 | Usage                                                                              | /do/platformio/install                                                                                        |
 | Softwares                                                                          | libmpc-dev, libelf1, libftdi1,                                                                                |
+| Modules                                                                            | /do/platformio/update,                                                                                        |
 | System                                                                             | /system/install libmpc-dev, /system/install libelf1, /system/install libftdi1, /system/makedir /user/arduino, |
 | 1. [PLATFORMIO] Install                                                            |                                                                                                               |
 | 1. This script is inspired by Russell Davis Tutorial $PICOLOR                      |                                                                                                               |
