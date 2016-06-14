@@ -4,7 +4,7 @@ and download code from github.
 
 ![Logo](https://raw.githubusercontent.com/pigetnet/platformio/master/doc/logo.png)
 
-
+# Install 
 ````
 /pi/install platformio
 ````
