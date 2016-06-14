@@ -25,5 +25,5 @@ This module uses platformio
 |Author                 |Ivan Kravets                        |
 |:---------------------:|:----------------------------------:|
 |License                |Apache 2.0 Licence                  |
-|Documentation (ENGLISH)|http://http://platformio.org/       |
+|Documentation (ENGLISH)|http://platformio.org/       |
 
